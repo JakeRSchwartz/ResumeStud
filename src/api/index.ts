@@ -3,7 +3,7 @@ import { json } from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import ResumeRoutes from './routes/resume.route'
-import serverless from 'serverless-http'
+
 
 
 const app = express()
@@ -11,6 +11,10 @@ app.use(json())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('https://resustud.vercel.app/api', ResumeRoutes)
+app.use('/api', ResumeRoutes)
 
-export default serverless(app)
+app.listen(5050, () => {
+  console.log('Server is running on port 5050')
+} );
+
+export default app
