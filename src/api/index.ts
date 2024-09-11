@@ -9,5 +9,5 @@ app.use(json())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/api', ResumeRoutes)
+app.use('https://resustud.vercel.app/api', ResumeRoutes)
 
