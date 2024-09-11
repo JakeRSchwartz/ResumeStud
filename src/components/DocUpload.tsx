@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import React from 'react'
 import FeedbackComponent from './Response'
 import '../App.css'
+import 'dotenv/config'
 
 
 const DocUpload = () => {
@@ -54,7 +55,7 @@ const DocUpload = () => {
     setShowForm(false)
     setIsLoading(true)
     try {
-      const response = await fetch(`https://resustud.vercel.app/api/upload`, {
+      const response = await fetch(`${process.env.VITE_BASEURL}/api/upload`, {
         method: 'POST',
         body: formData
       })
