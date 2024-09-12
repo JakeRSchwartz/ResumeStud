@@ -3,10 +3,10 @@ import { ChangeEvent, useState } from 'react'
 import React from 'react'
 import FeedbackComponent from './Response'
 import '../App.css'
-import 'dotenv/config'
 
 
 const DocUpload = () => {
+  const url = import.meta.env.VITE_BASEURL
   //State to store the selected file
   const [selectedFile, setselectedFile] = useState<File | null>(null)
   const [feedback, setFeedback] = useState<string | null>(null)
@@ -55,7 +55,7 @@ const DocUpload = () => {
     setShowForm(false)
     setIsLoading(true)
     try {
-      const response = await fetch(`${process.env.VITE_BASEURL}/api/upload`, {
+      const response = await fetch(`${url}/api/upload`, {
         method: 'POST',
         body: formData
       })
