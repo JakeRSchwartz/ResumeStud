@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import multer from 'multer'
 import axios from 'axios'
-import pdfParse from 'pdf-parse'
+import pdf from 'pdf-parse/lib/pdf-parse'
 import 'dotenv/config'
 
 const upload = multer({ storage: multer.memoryStorage() })
@@ -9,8 +9,13 @@ const upload = multer({ storage: multer.memoryStorage() })
 const router = express.Router()
 
 const extractTextFromPDF = async (fileBuffer: Buffer) => {
-  const pdfData = await pdfParse(fileBuffer)
-  return pdfData.text
+  try {
+    const pdfData = await pdf(fileBuffer)
+    return pdfData.text
+  } catch (error) {
+    console.error('Error parsing PDF:', error) // Improved error logging
+    throw new Error('Error parsing PDF')
+  }
 }
 
 // Function to analyze the resume text
@@ -31,10 +36,10 @@ const analyzeResumeText = async (
         },
         {
           role: 'user',
-          content: `Please review my resume and provide detailed feedback on how I can improve it for the job description given. Make sure to include specific examples as well. My resume text: ${resumeText}. The job description: ${jobDescription}`
+          content: `Please review my resume and provide detailed feedback on how I can improve it for the job description given. My resume text: ${resumeText}. The job description: ${jobDescription}`
         }
       ],
-      max_tokens: 1000 // Save money live better walmart
+      max_tokens: 1000
     },
     {
       headers: {
@@ -55,8 +60,16 @@ router.post(
     try {
       const file = req.file
       const jobDescription = req.body.jobDescription
-      if (!file) {
-        return res.status(400).json({ message: 'No file uploaded' })
+
+      // Check for missing file or incorrect file type
+      if (!file || file.mimetype !== 'application/pdf') {
+        return res
+          .status(400)
+          .json({ message: 'Invalid file format. Please upload a PDF.' })
+      }
+
+      if (!jobDescription) {
+        return res.status(400).json({ message: 'Job description is required' })
       }
 
       const apiKey = process.env.OPENAI_API_KEY
@@ -64,20 +77,22 @@ router.post(
         return res.status(500).json({ message: 'API key not set' })
       }
 
-      // Step 1: Extract the text
-      const resumeText = await extractTextFromPDF(file.buffer) //file.path
+      // Step 1: Extract the text from PDF
+      const resumeText = await extractTextFromPDF(file.buffer)
 
-      // Step 2: Analyze the resume text
+      // Step 2: Analyze the resume text using OpenAI
       const review = await analyzeResumeText(apiKey, resumeText, jobDescription)
 
       return res.status(200).json({ feedback: review })
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
+        console.error('Axios error:', error.response.data) // Improved error logging
         return res.status(500).json({
           message: 'Internal server error',
           error: error.response.data
         })
       } else {
+        console.error('Unknown error:', error) // Log other errors
         return res.status(500).json({ message: 'Internal server error', error })
       }
     }
@@ -85,3 +100,5 @@ router.post(
 )
 
 export default router
+
+

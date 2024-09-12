@@ -1,11 +1,8 @@
 import express from 'express'
 import { json } from 'express'
 import cors from 'cors'
-import ServerlessHttp from 'serverless-http'
 import bodyParser from 'body-parser'
 import ResumeRoutes from './routes/resume.route'
-
-
 
 const app = express()
 app.use(json())
@@ -15,4 +12,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api', ResumeRoutes)
 
 
-export default ServerlessHttp(app)
+const PORT = process.env.PORT || 5025
+
+app.listen(PORT, () => {
+  console.log(`Server running on port: ${PORT}`)
+})
+
+
+
+
