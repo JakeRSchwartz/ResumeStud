@@ -5,8 +5,8 @@ import FeedbackComponent from './Response'
 import '../App.css'
 
 const DocUpload = () => {
+  const url = import.meta.env.VITE_API_URL
   //State to store the selected file
-  const url = 'http://localhost:5025'
   const [selectedFile, setselectedFile] = useState<File | null>(null)
   const [feedback, setFeedback] = useState<string | null>(null)
   const [jobDescription, setJobDescription] = useState<string>('')
@@ -54,10 +54,13 @@ const DocUpload = () => {
     setShowForm(false)
     setIsLoading(true)
     try {
-      const response = await fetch(`${url}/api/upload`, {
-        method: 'POST',
-        body: formData
-      })
+      const response = await fetch(
+        `${url}/api/upload`,
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
 
       if (!response.ok) {
         throw new Error('Failed to upload resume')
