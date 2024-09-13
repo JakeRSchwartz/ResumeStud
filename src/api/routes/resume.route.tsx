@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express'
 import multer from 'multer'
 import axios from 'axios'
-import pdf from 'pdf-parse/lib/pdf-parse.js'
+//import pdf from 'pdf-parse/lib/pdf-parse.js'
+import pdf from 'pdf-parse'
 import 'dotenv/config'
 
 const upload = multer({ storage: multer.memoryStorage() })
