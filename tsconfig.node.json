@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2023"],
-    "module": "ESNext",
+    "module": "NodeNext", //ESNext
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "node", //bundler
+    "moduleResolution": "NodeNext", //bundler
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
