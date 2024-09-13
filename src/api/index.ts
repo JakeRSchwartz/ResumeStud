@@ -10,5 +10,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', ResumeRoutes)
+app.get('/favicon.ico', (req, res) => res.status(204))
+
 
 export default app
