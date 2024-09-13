@@ -1,51 +1,15 @@
-# React + TypeScript + Vite
+# Resume Stud 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Resume Stud** – the ultimate AI-powered resume feedback tool that helps you craft the perfect resume in no time! 🎯 Our app delivers **instant feedback** on your resume and leverages a trained ChatGPT model via API to provide personalized advice tailored to your unique career path. Start building your standout resume today!
 
-Currently, two official plugins are available:
+## 🌐 [Check it out here!](https://resume-stud.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-# ResumeStud
+- **Instant Feedback**: Upload your resume and get detailed, actionable feedback within seconds!
+- **AI-Powered Insights**: Resume Stud is connected to a trained ChatGPT model that provides smart suggestions, improving both content and structure.
+- **Personalized Tips**: Receive feedback tailored to your career goals, industry standards, and current job market trends.
+- **User-Friendly Interface**: Simple, clean, and intuitive design, making it easy for anyone to use.
+- **Free to Use**: Start refining your resume without any costs or hidden fees!
