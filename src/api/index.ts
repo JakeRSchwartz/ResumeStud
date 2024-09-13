@@ -11,13 +11,4 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', ResumeRoutes)
 
-
-const PORT = process.env.PORT || 5025
-
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`)
-})
-
-
-
-
+export default app
