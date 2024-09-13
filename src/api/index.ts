@@ -13,4 +13,3 @@ app.use('/api', ResumeRoutes)
 
 
 
-export default app
